@@ -41,7 +41,6 @@
   box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
 }
 
-/* Add Button */
 button[nz-button] {
   display: flex;
   align-items: center;
@@ -58,7 +57,6 @@ button[nz-button]:hover {
   box-shadow: 0 4px 12px rgba(24, 144, 255, 0.3);
 }
 
-/* Table Container */
 .ant-spin-nested-loading {
   background: white;
   border-radius: 8px;
@@ -66,7 +64,6 @@ button[nz-button]:hover {
   overflow: hidden;
 }
 
-/* Table Styles */
 nz-table {
   background: white;
 }
@@ -101,7 +98,6 @@ nz-table {
   background-color: transparent;
 }
 
-/* Action Buttons */
 .action-buttons {
   display: flex;
   gap: 8px;
@@ -145,7 +141,6 @@ nz-table {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* Empty State */
 .empty-state {
   padding: 40px;
   text-align: center;
@@ -156,7 +151,6 @@ nz-table {
   margin: 20px 0;
 }
 
-/* Modal Styles */
 .ant-modal-header {
   background: #f8fafc;
   border-bottom: 2px solid #e5e7eb;
@@ -172,7 +166,6 @@ nz-table {
   padding: 24px;
 }
 
-/* Form Styles */
 .ant-form-item {
   margin-bottom: 20px;
 }
@@ -201,18 +194,15 @@ nz-table {
   width: 100%;
 }
 
-/* Loading Spinner */
 .ant-spin {
   color: #1890ff;
 }
 
-/* Pagination */
 .ant-pagination {
   margin: 16px 0;
   text-align: right;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .header {
     flex-direction: column;

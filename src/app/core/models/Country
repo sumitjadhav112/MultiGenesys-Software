@@ -1,5 +1,4 @@
 export interface Country {
   id: string;
   name: string;
-  // adapt to actual mock response shape
 }

@@ -1,4 +1,3 @@
-// src/app/store/state/employee-state.ts
 import { EntityState } from '@ngrx/entity';
 import { Employee } from './Employee';
 

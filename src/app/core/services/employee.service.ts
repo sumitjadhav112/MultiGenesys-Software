@@ -30,8 +30,6 @@ export class EmployeeService {
   delete(id: string): Observable<void> {
     return this.http.delete<void>(`${BASE}/employee/${id}`);
   }
-
-  // countries (simple)
   getCountries(): Observable<any[]> {
     return this.http.get<any[]>(`https://669b3f09276e45187d34eb4e.mockapi.io/api/v1/country`);
   }
