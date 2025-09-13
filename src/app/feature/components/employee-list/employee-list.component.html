@@ -1,0 +1,176 @@
+<div class="container">
+  <div class="header">
+    <h2>Employee Management</h2>
+    <div class="header-actions">
+      <nz-input-group nzPrefixIcon="search" class="search-input">
+        <input 
+          type="text" 
+          nz-input 
+          placeholder="Search employees..." 
+          [(ngModel)]="searchValue" 
+        />
+      </nz-input-group>
+      <button 
+        nz-button 
+        nzType="primary" 
+        (click)="showAddModal()"
+      >
+        <span nz-icon nzType="plus"></span>
+        Add Employee
+      </button>
+    </div>
+  </div>
+
+  <nz-spin [nzSpinning]="isLoading">
+    <nz-table 
+      #employeeTable 
+      [nzData]="filteredEmployees" 
+      nzTableLayout="fixed"
+      [nzScroll]="{ x: '800px' }"
+      [nzShowPagination]="true"
+      [nzPageSize]="10"
+    >
+      <thead>
+        <tr>
+          <th nzWidth="20%">Name</th>
+          <th nzWidth="25%">Email</th>
+          <th nzWidth="20%">Position</th>
+          <th nzWidth="20%">Country</th>
+          <th nzWidth="20%">State</th>
+          <th nzWidth="20%">District</th>
+          <th nzWidth="15%">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of employeeTable.data">
+          <td>{{ employee.name }}</td>
+          <td>{{ employee.emailId }}</td>
+          <td>{{ employee.position || 'N/A' }}</td>
+          <td>{{ employee.country }}</td>
+          <td>{{ employee.state }}</td>
+          <td>{{ employee.district }}</td>
+          <td>
+            <div class="action-buttons">
+              <button 
+                nz-button 
+                nzType="primary" 
+                nzSize="small"
+                (click)="showEditModal(employee)"
+                class="edit-btn"
+              >
+                <span nz-icon nzType="edit"></span>
+              </button>
+              <button 
+                nz-button 
+                nzType="primary" 
+                nzDanger 
+                nzSize="small"
+                (click)="showDeleteConfirm(employee.id)"
+                class="delete-btn"
+              >
+                <span nz-icon nzType="delete"></span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+    
+    <div *ngIf="filteredEmployees.length === 0 && !isLoading" class="empty-state">
+      <nz-empty nzNotFoundContent="No employees found"></nz-empty>
+    </div>
+  </nz-spin>
+
+  <nz-modal 
+    [(nzVisible)]="isModalVisible" 
+    [nzTitle]="isEditMode ? 'Edit Employee' : 'Add Employee'" 
+    (nzOnCancel)="handleCancel()" 
+    (nzOnOk)="handleOk()"
+    [nzOkLoading]="false"
+    nzWidth="600px"
+  >
+    <ng-container *nzModalContent>
+      <form nz-form [formGroup]="employeeForm" nzLayout="horizontal">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="6" nzRequired>Name</nz-form-label>
+          <nz-form-control 
+            [nzSpan]="16" 
+            nzErrorTip="Please input name"
+            [nzValidateStatus]="employeeForm.get('name')?.invalid && employeeForm.get('name')?.touched ? 'error' : ''"
+          >
+            <input nz-input formControlName="name" placeholder="Enter full name" />
+          </nz-form-control>
+        </nz-form-item>
+        
+        <nz-form-item>
+          <nz-form-label [nzSpan]="6" nzRequired>Email</nz-form-label>
+          <nz-form-control 
+            [nzSpan]="16" 
+            nzErrorTip="Please input a valid email"
+            [nzValidateStatus]="employeeForm.get('emailId')?.invalid && employeeForm.get('emailId')?.touched ? 'error' : ''"
+          >
+            <input nz-input formControlName="emailId" placeholder="Enter email address" type="email" />
+          </nz-form-control>
+        </nz-form-item>
+        
+        <nz-form-item>
+          <nz-form-label [nzSpan]="6" nzRequired>Position</nz-form-label>
+          <nz-form-control 
+            [nzSpan]="16" 
+            nzErrorTip="Please input position"
+            [nzValidateStatus]="employeeForm.get('position')?.invalid && employeeForm.get('position')?.touched ? 'error' : ''"
+          >
+            <input nz-input formControlName="position" placeholder="Enter job position" />
+          </nz-form-control>
+        </nz-form-item>
+        
+        <nz-form-item>
+          <nz-form-label [nzSpan]="6" nzRequired>Country</nz-form-label>
+          <nz-form-control 
+            [nzSpan]="16" 
+            nzErrorTip="Please select country"
+            [nzValidateStatus]="employeeForm.get('country')?.invalid && employeeForm.get('country')?.touched ? 'error' : ''"
+          >
+            <nz-select 
+              formControlName="country" 
+              nzShowSearch 
+              nzAllowClear
+              nzPlaceHolder="Select country"
+              class="full-width"
+            >
+              <nz-option 
+                *ngFor="let country of countries" 
+                [nzLabel]="country" 
+                [nzValue]="country"
+              ></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+         <nz-form-item>
+          <nz-form-label [nzSpan]="6" nzRequired>State</nz-form-label>
+          <nz-form-control 
+            [nzSpan]="16" 
+            nzErrorTip="Please input position"
+            [nzValidateStatus]="employeeForm.get('state')?.invalid && employeeForm.get('state')?.touched ? 'error' : ''"
+          >
+            <input nz-input formControlName="state" placeholder="Enter state" />
+          </nz-form-control>
+        </nz-form-item>
+
+
+ <nz-form-item>
+          <nz-form-label [nzSpan]="6" nzRequired>District</nz-form-label>
+          <nz-form-control 
+            [nzSpan]="16" 
+            nzErrorTip="Please Enter your District"
+            [nzValidateStatus]="employeeForm.get('district')?.invalid && employeeForm.get('district')?.touched ? 'error' : ''"
+          >
+            <input nz-input formControlName="district" placeholder="Enter district" />
+          </nz-form-control>
+        </nz-form-item>
+
+
+      </form>
+    </ng-container>
+  </nz-modal>
+</div>
