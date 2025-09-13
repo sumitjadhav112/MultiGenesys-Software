@@ -239,3 +239,12 @@ nz-table {
     height: 28px;
   }
 }
+
+.employee-avatar {
+  width: 40px;       /* set consistent size */
+  height: 40px;
+  border-radius: 50%; /* make it circular */
+  object-fit: cover;  /* crop/fit image properly */
+  border: 2px solid #e5e7eb; /* light gray border */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* subtle shadow */
+}

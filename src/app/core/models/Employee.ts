@@ -9,6 +9,8 @@ export interface Employee {
   district?: string;
  position?: string; 
  country:any;
+ department:any;
+ avatar:any;
 }
 
 

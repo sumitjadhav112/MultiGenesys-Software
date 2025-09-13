@@ -59,7 +59,8 @@ export class EmployeeListComponent implements OnInit {
       position: ['', [Validators.required]],
       country: ['', [Validators.required]],
       state:['',[Validators.required]],
-      district:['',[Validators.required]]
+      district:['',[Validators.required]],
+      department:['',[Validators.required]]
 
     });
   }
@@ -114,7 +115,8 @@ export class EmployeeListComponent implements OnInit {
       position: employee.position,
       country: employee.country,
       state:employee.state,
-      district:employee.district
+      district:employee.district,
+      department:employee.department
     });
     this.isModalVisible = true;
   }

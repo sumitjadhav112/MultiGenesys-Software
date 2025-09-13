@@ -32,9 +32,11 @@
     >
       <thead>
         <tr>
+          <th nzWidth="20%">Profile</th>
           <th nzWidth="20%">Name</th>
           <th nzWidth="25%">Email</th>
           <th nzWidth="20%">Position</th>
+          <th nzWidth="20%">Department</th>
           <th nzWidth="20%">Country</th>
           <th nzWidth="20%">State</th>
           <th nzWidth="20%">District</th>
@@ -43,9 +45,12 @@
       </thead>
       <tbody>
         <tr *ngFor="let employee of employeeTable.data">
+        <td><img [src]="employee.avatar" alt="{{employee.name}}" class="employee-avatar" /></td>
+
           <td>{{ employee.name }}</td>
           <td>{{ employee.emailId }}</td>
           <td>{{ employee.position || 'N/A' }}</td>
+          <td>{{ employee.department || 'N/A' }}</td>
           <td>{{ employee.country }}</td>
           <td>{{ employee.state }}</td>
           <td>{{ employee.district }}</td>
